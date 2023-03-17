@@ -1,24 +1,21 @@
-import { IsNotEmpty, IsNumber, IsString} from "class-validator";
-
+/**
+ * Data transfer object for creating a new product.
+ * Contains the necessary fields for creating a product record in the database.
+ */
 export class CreateProductDto {
-  @IsNotEmpty()
-  @IsString()
+
+  // The unique ID of the product.
   ProductID: number;
 
-  @IsNotEmpty()
-  @IsString()
+  // The name of the product.
   ProductName: string;
 
-
-  @IsNotEmpty()
-  @IsNumber()
+  // The price of the product.
   ProductPrice: number;
 
-  @IsNotEmpty()
-  @IsNumber()
+  // The quantity of the product available.
   ProductQuantity: number;
 
-  @IsNotEmpty()
-  @IsNumber()
+  // The rating of the product, on a scale from 1 to 10.
   ProductRating: number;
 }
