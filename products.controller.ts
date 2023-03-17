@@ -12,6 +12,8 @@ import { Query } from '@nestjs/common';
 export class ProductsController {
     constructor(private ProductsService: ProductsService){}
     
+    // Get a product by ID
+    // Example request: GET /products/1111
     @Get(':ProductID')
     async getProducts(@Param('ProductID',ParseIntPipe)ProductID:number, @Res() res: Response){
         const product: Products = await this.ProductsService.getProducts(ProductID);
@@ -22,6 +24,8 @@ export class ProductsController {
         }
     }
     
+    // Get all products with optional sorting
+    // Example request: GET /products?sort=weighted_score
     @Get()
     async getAllProducts(@Res() res: Response, @Query('sort') sort?: string){
         var product: Products[] = await this.ProductsService.getAllProducts(sort);
@@ -33,9 +37,12 @@ export class ProductsController {
         }
     }
     
+    // Create a new product
+    // Example request: POST /products
+    // Request body: { "ProductName": "Example Product", "ProductDescription": "This is an example product.", "ProductPrice": 1000, "ProductQuantity": 50, "ProductRating": 4 }
     @Post()
     async createProducts(@Body() createProductDto: CreateProductDto,@Res() res: Response){
-        const product: Products = await this.ProductsService.createProducts(createProductDto);
+        const product: Products = await this.ProductsService.createProducts(createProductDto); 
         if(product) {
             res.status(HttpStatus.CREATED).send({ status: HttpStatus.CREATED + ' Created', data: product });
         } else {
@@ -43,6 +50,9 @@ export class ProductsController {
         }
     }
 
+    // Update a product by ID
+    // Example request: PATCH /products/1111
+    // Request body: { "ProductName": "Updated Product Name" }
     @Patch(':ProductID')
     async updateProductsById(@Param('ProductID',ParseIntPipe)ProductID:number, @Body() updateProductDto: UpdateProductDto, @Res() res: Response){
         const product = await this.ProductsService.updateProducts(ProductID,updateProductDto);
@@ -52,7 +62,9 @@ export class ProductsController {
             res.status(HttpStatus.NOT_FOUND).send({ status: HttpStatus.NOT_FOUND + ' Not Found' });
         }
     }
-
+    
+    // Delete a product by ID
+    // Example request: DELETE /products/1111
     @Delete(':ProductID')
     async deleteProductsById(@Param('ProductID',ParseIntPipe)ProductID:number, @Res() res: Response){
         const deleted = await this.ProductsService.deleteProducts(ProductID);
