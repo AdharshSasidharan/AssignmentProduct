@@ -1,35 +1,22 @@
-import { IsOptional,IsString,IsNumber} from "class-validator";
+/**
+ * Data transfer object for creating a new product.
+ * Contains the necessary fields for creating a product record in the database.
+ */
+export class CreateProductDto {
 
-export class UpdateProductDto {
+  // The unique ID of the product.
+  ProductID: number;
 
-    @IsOptional()
-    @IsString()
-    ProductID?: number;
+  // The name of the product.
+  ProductName: string;
 
-    @IsOptional()
-    @IsString()
-    ProductName?: string;
-    
-    @IsOptional()
-    @IsString()
-    ProductDesc?: string;
+  // The price of the product.
+  ProductPrice: number;
 
-    @IsOptional()
-    @IsNumber()
-    ProductPrice?: number;
+  // The quantity of the product available.
+  ProductQuantity: number;
 
- 
+  // The rating of the product, on a scale from 1 to 10.
+  ProductRating: number;
+}
 
-    @IsOptional()
-    @IsNumber()
-    ProductRating?:number;
-
-    @IsOptional()
-    @IsNumber()
-    ProductQuantity?: number;
-
-
-
-
-    
-    }
