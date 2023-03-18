@@ -19,10 +19,10 @@ export class ProductsController {
         const product: Products = await this.ProductsService.getProducts(ProductID);
         if(product) {
             // Return the product and a status code of 200 (OK) if it exists
-            res.header('Content-type', 'application/json').status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok', data: product });
+             res.status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok',Content_Type:"application/json", data: product});
         } else {
             // Return an error message and a status code of 404 (Not Found) if the product does not exist
-            res.header('Content-type', 'application/json').status(HttpStatus.NOT_FOUND).send({ status: HttpStatus.NOT_FOUND + ' Not Found' });
+           res.status(HttpStatus.NOT_FOUND).send(HttpStatus.NOT_FOUND+'  Not Found { "message": "Record not found" }');
         }
     }
 
@@ -35,12 +35,12 @@ export class ProductsController {
          product = customSort(product, sort); // Sort the products based on the given query parameter 'sort'
        
          // Return the sorted products and a status code of 200 (OK) if there are any
-         res.header('Content-type', 'application/json').status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok', data: product });
+        res.status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok',Content_Type:"application/json", data: product});
             
         } else {
             
            // Return an error message and a status code of 404 (Not Found) if there are no products
-            res.header('Content-type', 'application/json').status(HttpStatus.NOT_FOUND).send({ status: HttpStatus.NOT_FOUND + ' Not Found' });
+           res.status(HttpStatus.NOT_FOUND).send(HttpStatus.NOT_FOUND+'  Not Found { "message": "Record not found" }');
         }
     }
 
@@ -52,10 +52,10 @@ export class ProductsController {
         const product: Products = await this.ProductsService.createProducts(createProductDto);
         if(product) {
             // Return an error message and a status code of 400 (Bad Request) if the request body is invalid
-            res.header('Content-type', 'application/json').status(HttpStatus.CREATED).send({ status: HttpStatus.CREATED + ' Created', data: product });
+           res.status(HttpStatus.BAD_REQUEST).send(HttpStatus.BAD_REQUEST+'   Bad Request { "message": "Invalid Request Body" }');
         } else {
             // Return the new product and a status code of 200 (OK) if it was created successfully
-            res.header('Content-type', 'application/json').status(HttpStatus.BAD_REQUEST).send({ status: HttpStatus.BAD_REQUEST + ' Bad Request' });
+           res.status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok',Content_Type:"application/json", data: product});
         }
     }
 
@@ -67,10 +67,10 @@ export class ProductsController {
         const product = await this.ProductsService.updateProducts(ProductID,updateProductDto);
         if(product) {
            
-            res.header('Content-type', 'application/json').status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok', data: product });
+             res.status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok',Content_Type:"application/json", data: product});
         } else {
           
-            res.header('Content-type', 'application/json').status(HttpStatus.NOT_FOUND).send({ status: HttpStatus.NOT_FOUND + ' Not Found' });
+            res.status(HttpStatus.NOT_FOUND).send(HttpStatus.NOT_FOUND+'  Not Found { "message": "Record not found" }');
         }
     }
 
@@ -81,9 +81,10 @@ export class ProductsController {
         const deleted = await this.ProductsService.deleteProducts(ProductID);
         if(deleted) {
            
-            res.header('Content-type', 'application/json').status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok' });
+            res.status(HttpStatus.NOT_FOUND).send(HttpStatus.NOT_FOUND+'  Not Found { "message": "Record not found" }');
         } else {
-            res.header('Content-type', 'application/json').status(HttpStatus.NOT_FOUND).send({ status: HttpStatus.NOT_FOUND + ' Not Found' });
+            const status=HttpStatus.NO_CONTENT+"  No Content";
+            res.send(status);
         
         }
     }
