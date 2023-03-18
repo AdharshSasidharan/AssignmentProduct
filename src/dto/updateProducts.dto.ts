@@ -23,12 +23,5 @@ export class UpdateProductDto {
 }
 /*****************this code defines a TypeScript class called UpdateProductDto that has properties for updating the information of a product,
 such as its name, description, price, rating, and quantity. The ? after each property name means that the property is optional,
-    meaning that it doesn't have to be included in the object.*/////////////////////
+    meaning that it doesn't have to be included in the object.*/////////////////////    
 
-
-
-
-
-
-    
-}
