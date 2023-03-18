@@ -19,7 +19,7 @@ export class ProductsService {
    * @returns The product with the given ID, or `null` if it doesn't exist.
    */
   async getProducts(ProductID: number): Promise<Products> {
-    return this.productRepository.findOneBy({ ProductID });
+    return this.productRepository.findOneBy({ ProductID });// Find a product with the given ProductID
   }
 
   /**
@@ -29,9 +29,9 @@ export class ProductsService {
    * @returns An array of products, possibly sorted by the given field.
    */
   async getAllProducts(sort: string | undefined): Promise<Products[]> {
-    let products = await this.productRepository.find();
+    let products = await this.productRepository.find();// Find all products
     if (sort) {
-      products = customSort(products, sort);
+      products = customSort(products, sort);// Sort the products based on the given query parameter 'sort'
     }
     return products;
   }
@@ -43,8 +43,8 @@ export class ProductsService {
    * @returns The newly created product.
    */
   async createProducts(ProductDetails: CreateProductDto): Promise<Products> {
-    const newProduct = this.productRepository.create({ ...ProductDetails, createdAt: new Date() });
-    await this.productRepository.save(newProduct);
+    const newProduct = this.productRepository.create({ ...ProductDetails, createdAt: new Date() });// Create a new product with the given data
+    await this.productRepository.save(newProduct);// Save the new product to the database
     return newProduct;
   }
 
