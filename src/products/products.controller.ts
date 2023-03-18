@@ -18,10 +18,10 @@ export class ProductsController {
     async getProducts(@Param('ProductID',ParseIntPipe)ProductID:number, @Res() res: Response){
         const product: Products = await this.ProductsService.getProducts(ProductID);
         if(product) {
-            
+            // Return the product and a status code of 200 (OK) if it exists
             res.header('Content-type', 'application/json').status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok', data: product });
         } else {
-            
+            // Return an error message and a status code of 404 (Not Found) if the product does not exist
             res.header('Content-type', 'application/json').status(HttpStatus.NOT_FOUND).send({ status: HttpStatus.NOT_FOUND + ' Not Found' });
         }
     }
@@ -32,12 +32,14 @@ export class ProductsController {
     async getAllProducts(@Res() res: Response, @Query('sort') sort?: string){
         var product: Products[] = await this.ProductsService.getAllProducts(sort);
         if(product.length > 0) {
-         product = customSort(product, sort); 
-        
-         // Sort the products based on the given query parameter 'sort'
+         product = customSort(product, sort); // Sort the products based on the given query parameter 'sort'
+       
+         // Return the sorted products and a status code of 200 (OK) if there are any
          res.header('Content-type', 'application/json').status(HttpStatus.OK).send({ status: HttpStatus.OK + ' Ok', data: product });
+            
         } else {
-           
+            
+           // Return an error message and a status code of 404 (Not Found) if there are no products
             res.header('Content-type', 'application/json').status(HttpStatus.NOT_FOUND).send({ status: HttpStatus.NOT_FOUND + ' Not Found' });
         }
     }
@@ -49,10 +51,10 @@ export class ProductsController {
     async createProducts(@Body() createProductDto: CreateProductDto,@Res() res: Response){
         const product: Products = await this.ProductsService.createProducts(createProductDto);
         if(product) {
-           
+            // Return an error message and a status code of 400 (Bad Request) if the request body is invalid
             res.header('Content-type', 'application/json').status(HttpStatus.CREATED).send({ status: HttpStatus.CREATED + ' Created', data: product });
         } else {
-          
+            // Return the new product and a status code of 200 (OK) if it was created successfully
             res.header('Content-type', 'application/json').status(HttpStatus.BAD_REQUEST).send({ status: HttpStatus.BAD_REQUEST + ' Bad Request' });
         }
     }
