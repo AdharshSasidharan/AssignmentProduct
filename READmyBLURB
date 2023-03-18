@@ -1,0 +1,13 @@
+We have a ProductsController and a ProductsService which are part of a NestJS application for managing products. The controller comprises numerous API endpoints that allow for the creation, retrieval, modification and expunging of a plethora of diverse products. The service is responsible for communicating with the database using the TypeORM ORM.
+
+In ProductsController, we have defined the APIs endpoints using the decorators provided by NestJS. For example, the @Get() decorator defines an HTTP GET method that will be invoked when the API endpoint is accessed. We also have some parameters that are extracted from the request, such as ProductID in getProducts API, and createProductDto and updateProductDto in createProducts and updateProductsById APIs, respectively.
+
+Amongst the myriad of functionalities offered by our ProductsService, we have intricately crafted a plethora of methods that seamlessly interact with the database. Avail yourself to getProducts in order to procure an individual product using its unique identifier; or employ getAllProducts for access to all products, which can be optionally sorted based on your preferences regarding any given field. You may also opt for createProduct should you find needful occasion arises; likewise updateProduct and deleteProduct exist as options whenever necessary updates or removal actions are required in relation an existing item within our extensive inventory system.
+
+CHALLENGES:
+One of the challenges in this code is error handling. We need to make sure that we return the appropriate error status codes and messages when something goes wrong, such as when a product is not found or when there is an invalid request body.
+
+Another challenge is sorting. We have implemented a custom sorting function customSort to sort the products based on the given query parameter 'sort'. This function sorts the products in ascending or descending order based on the value of the query parameter. However, this implementation assumes that the sort parameter will always be a valid field in the Products entity. We could improve this by checking whether the sort parameter is a valid field before sorting.
+
+TAKEAWAY:
+One may deduce that NestJS streamlines the development process of a REST API by utilizing decorators, resulting in fewer repetitive code segments. Additionally, it is crucial to implement meticulous error handling and data validation processes for optimal security measures and seamless operation of said API.
