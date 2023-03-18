@@ -1,0 +1,27 @@
+----------------------------------------------------------------products.controller.ts------------------------------------------------------------------------------
+The ProductsController is a Nest.js controller that handles incoming HTTP requests related to products. It defines several endpoints that allow clients to perform CRUD operations on products.
+
+The @Controller('products') decorator sets the base URL for all the endpoints defined in this controller to /products.
+
+The ProductsController has a constructor that receives an instance of the ProductsService, which is used to perform database operations related to products.
+
+The @Get(':ProductID') decorator defines an endpoint that retrieves a single product by ID. The @Param('ProductID',ParseIntPipe) decorator extracts the ProductID parameter from the URL and converts it to a number. The @Res() res: Response decorator injects the response object, which is used to send the HTTP response back to the client.
+
+The async getProducts() method retrieves a product by ID using the ProductsService. If the product exists, it sends an HTTP response with status code 200 OK and the product data. Otherwise, it sends an HTTP response with status code 404 Not Found and an error message.
+
+The @Get() decorator defines an endpoint that retrieves all products. The @Res() res: Response decorator injects the response object, which is used to send the HTTP response back to the client. The @Query('sort') decorator extracts the sort query parameter from the URL.
+
+The async getAllProducts() method retrieves all products using the ProductsService. If the list of products is not empty, it sorts them based on the sort query parameter (if present) using the customSort() function, and sends an HTTP response with status code 200 OK and the sorted product list. Otherwise, it sends an HTTP response with status code 404 Not Found and an error message.
+
+The @Post() decorator defines an endpoint that creates a new product. The @Body() decorator extracts the request body as a CreateProductDto object. The @Res() res: Response decorator injects the response object, which is used to send the HTTP response back to the client.
+
+The async createProducts() method creates a new product using the ProductsService. If the product is created successfully, it sends an HTTP response with status code 200 OK and the product data. Otherwise, it sends an HTTP response with status code 400 Bad Request and an error message.
+
+The @Patch(':ProductID') decorator defines an endpoint that updates an existing product by ID. The @Param('ProductID',ParseIntPipe) decorator extracts the ProductID parameter from the URL and converts it to a number. The @Body() decorator extracts the request body as an UpdateProductDto object. The @Res() res: Response decorator injects the response object, which is used to send the HTTP response back to the client.
+
+The async updateProductsById() method updates an existing product using the ProductsService. If the product is updated successfully, it sends an HTTP response with status code 200 OK and the updated product data. Otherwise, it sends an HTTP response with status code 404 Not Found and an error message.
+
+The @Delete(':ProductID') decorator defines an endpoint that deletes an existing product by ID. The @Param('ProductID',ParseIntPipe) decorator extracts the ProductID parameter from the URL and converts it to a number. The @Res() res: Response decorator injects the response object, which is used to send the HTTP response back to the client.
+
+The async deleteProductsById() method deletes an existing product using the ProductsService. If the product is deleted successfully, it sends an HTTP response with status code 200 OK and the deleted product data. Otherwise, it sends an HTTP response with status code 404 Not Found and an error message.
+
